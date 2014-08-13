@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Main">
+      <UniqueIdentifier>{f80e6325-5c30-47ea-bc0f-4503d9d128f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GDel3D">
+      <UniqueIdentifier>{2d11f928-9519-4dc4-9c5f-9d9f52d225b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GDel3D\GPU">
+      <UniqueIdentifier>{02e23483-3fec-484d-8e7a-e434b1b83826}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GDel3D\CPU">
+      <UniqueIdentifier>{e9138022-1849-4595-932b-a61066b4e6b8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\RandGen.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gDel3D\GPU\CudaWrapper.h">
+      <Filter>GDel3D\GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gDel3D\GPU\DPredWrapper.h">
+      <Filter>GDel3D\GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gDel3D\GPU\HostToKernel.h">
+      <Filter>GDel3D\GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gDel3D\GPU\KerCommon.h">
+      <Filter>GDel3D\GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gDel3D\GPU\KerDivision.h">
+      <Filter>GDel3D\GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gDel3D\GPU\KerPredicates.h">
+      <Filter>GDel3D\GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gDel3D\GPU\KerPredWrapper.h">
+      <Filter>GDel3D\GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gDel3D\GPU\KerShewchuk.h">
+      <Filter>GDel3D\GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gDel3D\GPU\ThrustWrapper.h">
+      <Filter>GDel3D\GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gDel3D\CPU\predicates.h">
+      <Filter>GDel3D\CPU</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gDel3D\CPU\PredWrapper.h">
+      <Filter>GDel3D\CPU</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gDel3D\CPU\Splaying.h">
+      <Filter>GDel3D\CPU</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gDel3D\CPU\Star.h">
+      <Filter>GDel3D\CPU</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gDel3D\CommonTypes.h">
+      <Filter>GDel3D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gDel3D\GpuDelaunay.h">
+      <Filter>GDel3D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gDel3D\PerfTimer.h">
+      <Filter>GDel3D</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gDel3D\CPU\CPUDecl.h">
+      <Filter>GDel3D\CPU</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gDel3D\GPU\GPUDecl.h">
+      <Filter>GDel3D\GPU</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DelaunayChecker.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InputCreator.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\RandGen.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gDel3D\CPU\predicates.cpp">
+      <Filter>GDel3D\CPU</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gDel3D\CPU\PredWrapper.cpp">
+      <Filter>GDel3D\CPU</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gDel3D\CPU\Splaying.cpp">
+      <Filter>GDel3D\CPU</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gDel3D\CPU\Star.cpp">
+      <Filter>GDel3D\CPU</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DelaunayChecker.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InputCreator.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Demo.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CudaCompile Include="src\gDel3D\GPU\KerDivision.cu">
+      <Filter>GDel3D\GPU</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src\gDel3D\GPU\KerPredicates.cu">
+      <Filter>GDel3D\GPU</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src\gDel3D\GPU\ThrustWrapper.cu">
+      <Filter>GDel3D\GPU</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src\gDel3D\GpuDelaunay.cu">
+      <Filter>GDel3D</Filter>
+    </CudaCompile>
+  </ItemGroup>
+</Project>
