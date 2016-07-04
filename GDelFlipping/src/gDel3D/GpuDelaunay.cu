@@ -41,8 +41,8 @@ DAMAGE.
 
 #include "GpuDelaunay.h"
 
-#include<iomanip>
-#include<iostream>
+#include <iomanip>
+#include <iostream>
 
 #include "GPU/CudaWrapper.h"
 #include "GPU/HostToKernel.h"

@@ -44,26 +44,27 @@ DAMAGE.
 // STL
 #include <algorithm>
 #include <cassert>
+#include <cfloat>
 #include <fstream>
 #include <iostream>
 #include <iterator>
 #include <limits>
+#include <queue>
 #include <set>
 #include <sstream>
 #include <string>
 #include <vector>
-#include <queue>
-#include <cfloat>
 
 // CUDA
 #include "GPU/CudaWrapper.h"
 
 // Thrust
-#include <thrust/host_vector.h>
 #include <thrust/device_vector.h>
+#include <thrust/extrema.h>
+#include <thrust/host_vector.h>
 #include <thrust/remove.h>
-#include <thrust/sequence.h>
 #include <thrust/scan.h>
+#include <thrust/sequence.h>
 #include <thrust/sort.h>
 #include <thrust/transform_scan.h>
 #include <thrust/unique.h>
