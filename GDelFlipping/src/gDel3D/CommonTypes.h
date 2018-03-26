@@ -61,6 +61,7 @@ DAMAGE.
 // Thrust
 #include <thrust/device_vector.h>
 #include <thrust/extrema.h>
+#include <thrust/gather.h>
 #include <thrust/host_vector.h>
 #include <thrust/remove.h>
 #include <thrust/scan.h>
