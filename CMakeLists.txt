@@ -35,7 +35,7 @@ list(APPEND HEADER_FILES_GPU
     GDelFlipping/src/gDel3D/GPU/KerCommon.h
     GDelFlipping/src/gDel3D/GPU/KerDivision.h
     GDelFlipping/src/gDel3D/GPU/KerPredicates.h
-    GDelFlipping/src/gDel3D/GPU/KerSchewchuk.h
+    GDelFlipping/src/gDel3D/GPU/KerShewchuk.h
     GDelFlipping/src/gDel3D/GPU/ThrustWrapper.h)
 
 list(APPEND HEADER_FILES_GDEL3D
