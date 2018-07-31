@@ -29,6 +29,7 @@ list(APPEND HEADER_FILES_CPU
     GDelFlipping/src/gDel3D/CPU/Star.h)
 
 list(APPEND HEADER_FILES_GPU
+    GDelFlipping/src/gDel3D/GPU/DPredWrapper.h
     GDelFlipping/src/gDel3D/GPU/CudaWrapper.h
     GDelFlipping/src/gDel3D/GPU/GPUDecl.h
     GDelFlipping/src/gDel3D/GPU/HostToKernel.h
