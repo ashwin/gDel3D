@@ -1,4 +1,4 @@
-project(gflip3d)
+project(gdel3d)
 set(APP_NAME "${PROJECT_NAME}_demo")
 set(LIB_NAME_STATIC "${PROJECT_NAME}_static")
 set(LIB_NAME "${PROJECT_NAME}")

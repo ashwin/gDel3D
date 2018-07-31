@@ -8,7 +8,7 @@ fi
 mkdir -p ${BUILD_TREE}
 pushd ${BUILD_TREE}
 
-cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="/devsystem/dependencies/ubuntu16/gflip3d/gflip3d-1.0/" -DCUDA_TOOLKIT_ROOT_DIR="/devsystem/dependencies/ubuntu16/cuda/cuda-8.0/" -DCMAKE_POSITION_INDEPENDENT_CODE=True ..
+cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX="/devsystem/dependencies/ubuntu16/gdel3d/gdel3d-1.0/" -DCUDA_TOOLKIT_ROOT_DIR="/devsystem/dependencies/ubuntu16/cuda/cuda-8.0/" -DCMAKE_POSITION_INDEPENDENT_CODE=True ..
 
 make -j
 make install
