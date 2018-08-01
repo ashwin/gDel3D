@@ -218,10 +218,10 @@ struct Tet
 
     __forceinline__ __host__ __device__ int minIdx() const
     {
-        int idx1 = min( _v[0], _v[1] ); 
-        int idx2 = min( _v[2], _v[3] ); 
+        int idx1 = min<int>( _v[0], _v[1] ); 
+        int idx2 = min<int>( _v[2], _v[3] ); 
 
-        return min( idx1, idx2 ); 
+        return min<int>( idx1, idx2 ); 
     }
 };
 

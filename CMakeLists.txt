@@ -1,18 +1,33 @@
-project(gflip3d)
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.2)
+project(gdel3d)
+set(APP_NAME "${PROJECT_NAME}_demo")
+set(LIB_NAME_STATIC "${PROJECT_NAME}_static")
+set(LIB_NAME "${PROJECT_NAME}")
+
+## cuda
 find_package(CUDA QUIET REQUIRED)
-set(CMAKE_BUILD_TYPE Release)
+set(CUDA_SEPARABLE_COMPILATION ON)
+set(CUDA_ATTACH_VS_BUILD_RULE_TO_CUDA_FILE OFF)
+
+# How to turn off specific warnings from nvcc
+# (1) See this for available options: http://www.ssl.berkeley.edu/~jimm/grizzly_docs/SSL/opt/intel/cc/9.0/lib/locale/en_US/mcpcom.msg
+#     For example, for the warning "signed bit field of length 1" you will find the option "signed_one_bit_field"
+# (2) Use: -Xcudafe "--diag_suppress=signed_one_bit_field"
 set(CUDA_NVCC_FLAGS
-    ${CUDA_NVCC_FLAGS};
-    -gencode arch=compute_35,code=sm_35
-    -gencode arch=compute_30,code=sm_30)
-include_directories(
-    GDelFlipping/Main
-    )
-cuda_add_executable(
-    ${PROJECT_NAME}
+        #  -lineinfo
+        #  --use_fast_math
+        -Wno-deprecated-gpu-targets
+        -Xcompiler "-fPIC"
+        -maxrregcount=0
+        -Xcudafe "--diag_suppress=signed_one_bit_field"
+        -Xcudafe "--diag_suppress=extra_semicolon"
+        -Xcudafe "--diag_suppress=linkage_specifier_not_allowed"
+        CACHE STRING "nvcc flags" FORCE
+        )
+
+## sources
+list(APPEND SOURCE_FILES 
     GDelFlipping/src/DelaunayChecker.cpp
-    GDelFlipping/src/Demo.cpp
     GDelFlipping/src/InputCreator.cpp
     GDelFlipping/src/RandGen.cpp
     GDelFlipping/src/gDel3D/GpuDelaunay.cu
@@ -22,5 +37,58 @@ cuda_add_executable(
     GDelFlipping/src/gDel3D/CPU/Star.cpp
     GDelFlipping/src/gDel3D/GPU/KerDivision.cu
     GDelFlipping/src/gDel3D/GPU/KerPredicates.cu
-    GDelFlipping/src/gDel3D/GPU/ThrustWrapper.cu
-    )
+    GDelFlipping/src/gDel3D/GPU/ThrustWrapper.cu)
+
+list(APPEND HEADER_FILES_CPU
+    GDelFlipping/src/gDel3D/CPU/CPUDecl.h
+    GDelFlipping/src/gDel3D/CPU/predicates.h
+    GDelFlipping/src/gDel3D/CPU/PredWrapper.h
+    GDelFlipping/src/gDel3D/CPU/Splaying.h
+    GDelFlipping/src/gDel3D/CPU/Star.h)
+
+list(APPEND HEADER_FILES_GPU
+    GDelFlipping/src/gDel3D/GPU/DPredWrapper.h
+    GDelFlipping/src/gDel3D/GPU/CudaWrapper.h
+    GDelFlipping/src/gDel3D/GPU/GPUDecl.h
+    GDelFlipping/src/gDel3D/GPU/HostToKernel.h
+    GDelFlipping/src/gDel3D/GPU/KerCommon.h
+    GDelFlipping/src/gDel3D/GPU/KerDivision.h
+    GDelFlipping/src/gDel3D/GPU/KerPredicates.h
+    GDelFlipping/src/gDel3D/GPU/KerShewchuk.h
+    GDelFlipping/src/gDel3D/GPU/ThrustWrapper.h)
+
+list(APPEND HEADER_FILES_GDEL3D
+    GDelFlipping/src/gDel3D/CommonTypes.h
+    GDelFlipping/src/gDel3D/GpuDelaunay.h
+    GDelFlipping/src/gDel3D/PerfTimer.h)
+
+list(APPEND HEADER_FILES_COMMON
+    GDelFlipping/src/DelaunayChecker.h
+    GDelFlipping/src/InputCreator.h
+    GDelFlipping/src/RandGen.h)
+
+# build the app    
+cuda_add_executable(${APP_NAME} ${SOURCE_FILES} GDelFlipping/src/Demo.cpp)
+set_target_properties(${APP_NAME} PROPERTIES CUDA_SEPARABLE_COMPILATION ON)    
+
+# build the static library    
+cuda_add_library(${LIB_NAME_STATIC} STATIC ${SOURCE_FILES})
+set_target_properties(${LIB_NAME_STATIC} PROPERTIES CUDA_SEPARABLE_COMPILATION ON)
+
+# build the shared library    
+cuda_add_library(${LIB_NAME} SHARED ${SOURCE_FILES})
+set_target_properties(${LIB_NAME} PROPERTIES CUDA_SEPARABLE_COMPILATION ON)
+
+
+#########################################################    
+install(TARGETS ${APP_NAME} DESTINATION bin)
+install(TARGETS ${LIB_NAME_STATIC} DESTINATION lib)
+install(TARGETS ${LIB_NAME} DESTINATION lib)
+
+install(FILES ${HEADER_FILES_COMMON} DESTINATION include)
+install(FILES ${HEADER_FILES_GDEL3D} DESTINATION include/gDel3D)
+install(FILES ${HEADER_FILES_CPU} DESTINATION include/gDel3D/CPU)
+install(FILES ${HEADER_FILES_GPU} DESTINATION include/gDel3D/GPU)
+#########################################################
+    
+  
