@@ -1,13 +1,31 @@
+cmake_minimum_required(VERSION 3.2)
 project(gdel3d)
 set(APP_NAME "${PROJECT_NAME}_demo")
 set(LIB_NAME_STATIC "${PROJECT_NAME}_static")
 set(LIB_NAME "${PROJECT_NAME}")
 
-cmake_minimum_required(VERSION 2.8)
+## cuda
 find_package(CUDA QUIET REQUIRED)
 set(CUDA_SEPARABLE_COMPILATION ON)
 set(CUDA_ATTACH_VS_BUILD_RULE_TO_CUDA_FILE OFF)
 
+# How to turn off specific warnings from nvcc
+# (1) See this for available options: http://www.ssl.berkeley.edu/~jimm/grizzly_docs/SSL/opt/intel/cc/9.0/lib/locale/en_US/mcpcom.msg
+#     For example, for the warning "signed bit field of length 1" you will find the option "signed_one_bit_field"
+# (2) Use: -Xcudafe "--diag_suppress=signed_one_bit_field"
+set(CUDA_NVCC_FLAGS
+        #  -lineinfo
+        #  --use_fast_math
+        -Wno-deprecated-gpu-targets
+        -Xcompiler "-fPIC"
+        -maxrregcount=0
+        -Xcudafe "--diag_suppress=signed_one_bit_field"
+        -Xcudafe "--diag_suppress=extra_semicolon"
+        -Xcudafe "--diag_suppress=linkage_specifier_not_allowed"
+        CACHE STRING "nvcc flags" FORCE
+        )
+
+## sources
 list(APPEND SOURCE_FILES 
     GDelFlipping/src/DelaunayChecker.cpp
     GDelFlipping/src/InputCreator.cpp
@@ -58,14 +76,14 @@ cuda_add_library(${LIB_NAME_STATIC} STATIC ${SOURCE_FILES})
 set_target_properties(${LIB_NAME_STATIC} PROPERTIES CUDA_SEPARABLE_COMPILATION ON)
 
 # build the shared library    
-# cuda_add_library(${LIB_NAME} SHARED ${SOURCE_FILES})
-# set_target_properties(${LIB_NAME} PROPERTIES CUDA_SEPARABLE_COMPILATION ON)
+cuda_add_library(${LIB_NAME} SHARED ${SOURCE_FILES})
+set_target_properties(${LIB_NAME} PROPERTIES CUDA_SEPARABLE_COMPILATION ON)
 
 
 #########################################################    
 install(TARGETS ${APP_NAME} DESTINATION bin)
 install(TARGETS ${LIB_NAME_STATIC} DESTINATION lib)
-# install(TARGETS ${LIB_NAME} DESTINATION lib)
+install(TARGETS ${LIB_NAME} DESTINATION lib)
 
 install(FILES ${HEADER_FILES_COMMON} DESTINATION include)
 install(FILES ${HEADER_FILES_GDEL3D} DESTINATION include/gDel3D)
